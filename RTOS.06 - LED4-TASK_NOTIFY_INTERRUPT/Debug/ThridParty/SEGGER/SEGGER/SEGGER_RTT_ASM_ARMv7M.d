@@ -1,0 +1,8 @@
+ThridParty/SEGGER/SEGGER/SEGGER_RTT_ASM_ARMv7M.o: \
+ ../ThridParty/SEGGER/SEGGER/SEGGER_RTT_ASM_ARMv7M.S \
+ ../ThridParty/SEGGER/SEGGER/SEGGER_RTT.h \
+ ../ThridParty/SEGGER/SEGGER/../Config/SEGGER_RTT_Conf.h
+
+../ThridParty/SEGGER/SEGGER/SEGGER_RTT.h:
+
+../ThridParty/SEGGER/SEGGER/../Config/SEGGER_RTT_Conf.h:
