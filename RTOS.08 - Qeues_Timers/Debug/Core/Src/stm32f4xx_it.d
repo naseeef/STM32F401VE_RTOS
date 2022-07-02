@@ -40,6 +40,7 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
  C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/list.h \
  C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/queue.h \
  C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/task.h \
+ C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/timers.h \
  ../Core/Inc/stm32f4xx_it.h
 
 ../Core/Inc/main.h:
@@ -125,5 +126,7 @@ C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeR
 C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/queue.h:
 
 C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/task.h:
+
+C:/Users/Naseef/Documents/STM32CubeIDE/RTOS.08\ -\ Qeues_Timers/ThridParty/FreeRTOS/include/timers.h:
 
 ../Core/Inc/stm32f4xx_it.h:

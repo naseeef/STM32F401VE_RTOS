@@ -78,6 +78,11 @@ volatile BaseType_t status_button =0;
 	QueueHandle_t q_data, q_print;
 
 	volatile uint8_t user_data;
+
+	state_t curr_state = sMainMenu;
+
+	TimerHandle_t led_timer[4];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -86,6 +91,8 @@ static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
+void led_effect_callback(TimerHandle_t xTimer);
 
 /* USER CODE END PFP */
 
@@ -149,10 +156,14 @@ int main(void)
   q_print = xQueueCreate(10, sizeof(size_t));
   configASSERT(q_print != NULL);
 
+  for (int i=0; i<4; i++)
+  {
+	  led_timer[i] = xTimerCreate("led_timer", pdMS_TO_TICKS(500), pdTRUE, (void*) (i+1), led_effect_callback);
+  }
 
-  HAL_UART_Receive_IT(&huart2, &user_data, 1);
+  HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
 
-  //start freertos scheduler
+  //start FreeRTOS scheduler
   vTaskStartScheduler();
   /* USER CODE END 2 */
 
@@ -301,9 +312,52 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+/* This function called from UART interrupt handler , hence executes in interrupt context */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+	uint8_t dummy;
 
+	if(! xQueueIsQueueFullFromISR(q_data))
+		{
+			/*Enqueue data byte */
+			xQueueSendFromISR(q_data, (void*)&user_data, NULL);
+		}
+	else
+		{
+			if(user_data == '\n')
+				{
+					/*Make sure that last data byte of the queue is '\n' */
+					xQueueReceiveFromISR(q_data,(void*)&dummy,NULL);
+					xQueueSendFromISR(q_data ,(void*)&user_data , NULL);
+				}
+		}
+
+	/*Send notification to command handling task if user_data = '\n' */
+	if( user_data == '\n' )
+		{
+			/*send notification to command handling task */
+			xTaskNotifyFromISR(handle_cmd_task,0,eNoAction,NULL);
+		}
+		/* Enable UART data byte reception again in IT mode */
+		HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
+}
+
+void led_effect_callback(TimerHandle_t xTimer)
+{
+	int id;
+	id = (uint32_t) pvTimerGetTimerID(xTimer);
+
+	switch(id)
+	{
+	case 1:
+		led_effect1();
+	case 2:
+		led_effect1();
+	case 3:
+		led_effect1();
+	case 4:
+		led_effect1();
+	}
 }
 
 /* USER CODE END 4 */

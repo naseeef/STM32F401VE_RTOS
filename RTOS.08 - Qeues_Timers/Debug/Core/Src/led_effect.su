@@ -1,0 +1,5 @@
+led_effect.c:10:6:led_effect_stop	24	static
+led_effect.c:18:6:led_effect	16	static
+led_effect.c:27:6:turn_off_leds	4	static
+led_effect.c:32:6:turn_on_leds	4	static
+led_effect.c:37:6:led_effect1	8	static
