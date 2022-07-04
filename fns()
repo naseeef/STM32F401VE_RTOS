@@ -1,0 +1,46 @@
+  status = xTaskCreate(task1_handler, "Task-1", 200, "Hello - T1", 2, &task1_handle);
+configASSERT
+  vTaskStartScheduler();
+0xE0001000
+TaskHandle_t
+BaseType_t
+  SEGGER_SYSVIEW_Conf();
+  SEGGER_SYSVIEW_Start();
+taskYIELD();
+xTaskGetTickCount();
+TickType_t
+HAL_GPIO_TogglePin
+vTaskDelay(pdMS_TO_TICKS(1000));
+vTaskDelayUntil(&last_wakeup_time,pdMS_TO_TICKS(1000));
+SEGGER_SYSVIEW_PrintfTarget("Toggling L G");
+status = xTaskNotifyWait(0,0,NULL,pdMS_TO_TICKS(1000));
+vTaskSuspendAll();
+xTaskResumeAll();
+vTaskDelete(NULL);
+xTaskNotify(next_task_handle,0,eNoAction);
+			portENTER_CRITICAL();
+			portEXIT_CRITICAL();
+			vTaskSuspendAll();
+xTaskGetHandle("LED_Green");
+uxTaskPriorityGet(t1);
+xTaskGetCurrentTaskHandle();
+vTaskPrioritySet(t1,p2);
+	traceISR_ENTER();
+	traceISR_EXIT();
+UBaseType_t
+xTaskHandle
+QueueHandle_t
+TimerHandle_t
+  q_data = xQueueCreate(10, sizeof(char));
+	  led_timer[i] = xTimerCreate("led_timer", pdMS_TO_TICKS(500), pdTRUE, (void*) (i+1), led_effect_callback);
+	if(! xQueueIsQueueFullFromISR(q_data))
+			xQueueSendFromISR(q_data, (void*)&user_data, NULL);
+					xQueueReceiveFromISR(q_data,(void*)&dummy,NULL);
+xTaskNotifyFromISR
+	id = (uint32_t) pvTimerGetTimerID(xTimer);
+		xTimerStop(led_timer[i],portMAX_DELAY);
+	xTimerStart(led_timer[n-1],portMAX_DELAY);
+			xQueueSend(q_print,&msg_menu,portMAX_DELAY);
+				option = cmd -> payload[0] - 48;
+		xQueueReceive(q_print, &msg, portMAX_DELAY);
+	status = uxQueueMessagesWaiting(q_data);
